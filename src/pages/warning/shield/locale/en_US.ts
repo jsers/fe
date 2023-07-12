@@ -8,6 +8,7 @@ const en_US = {
   duration: 'Duration',
   etime: 'End time',
   prod: 'Type',
+  severities: 'Severity',
   mute_type: {
     label: 'Mute type',
     0: 'Fixed time',

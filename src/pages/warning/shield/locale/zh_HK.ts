@@ -10,6 +10,7 @@ const zh_HK = {
   duration: '遮蔽時長',
   etime: '遮蔽結束時間',
   prod: '監控型別',
+  severities: '屏蔽事件等級',
   mute_type: {
     '0': '固定時間',
     '1': '週期時間',

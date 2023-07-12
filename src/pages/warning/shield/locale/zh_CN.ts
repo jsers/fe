@@ -10,6 +10,7 @@ const zh_CN = {
   duration: '屏蔽时长',
   etime: '屏蔽结束时间',
   prod: '监控类型',
+  severities: '屏蔽事件等级',
   mute_type: {
     label: '屏蔽时间类型',
     0: '固定时间',

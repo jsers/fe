@@ -29,6 +29,7 @@ const zh_HK = {
   webhooks_msg: '回撥地址不能為空',
   prod: '監控型別',
   subscribe_btn: '訂閱',
+  severities: '訂閱事件等級',
 };
 
 export default zh_HK;

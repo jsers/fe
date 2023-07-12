@@ -32,6 +32,7 @@ export interface subscribeItem {
   user_group_ids?: string;
   new_channels: string;
   prod: string;
+  severities?: number[];
 }
 
 interface IuserItem {

@@ -37,7 +37,7 @@ interface Props {
   type?: number; // 1:编辑; 2:克隆
 }
 
-const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
+const OperateForm: React.FC<Props> = ({ detail = {} as subscribeItem, type }) => {
   const { t } = useTranslation('alertSubscribes');
   const [form] = Form.useForm(null as any);
   const history = useHistory();
@@ -133,6 +133,7 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
           initialValues={{
             ...detail,
             prod: detail.prod || 'host',
+            severities: detail.severities || [1, 2, 3],
             redefine_severity: detail?.redefine_severity ? true : false,
             redefine_channels: detail?.redefine_channels ? true : false,
             user_group_ids: detail?.user_group_ids ? detail?.user_group_ids?.split(' ') : [],
@@ -187,7 +188,24 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
                 }
               }}
             </Form.Item>
-
+            <Form.Item label={t('severities')} name='severities' initialValue={[1, 2, 3]}>
+              <Checkbox.Group
+                options={[
+                  {
+                    label: t('common:severity.1'),
+                    value: 1,
+                  },
+                  {
+                    label: t('common:severity.2'),
+                    value: 2,
+                  },
+                  {
+                    label: t('common:severity.3'),
+                    value: 3,
+                  },
+                ]}
+              />
+            </Form.Item>
             <Form.Item label={t('sub_rule_name')}>
               {!!ruleCur?.id && (
                 <Button
@@ -205,7 +223,6 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
               <EditOutlined style={{ cursor: 'pointer', fontSize: '18px' }} onClick={chooseRule} />
               {!!ruleCur?.id && <DeleteOutlined style={{ cursor: 'pointer', fontSize: '18px', marginLeft: 5 }} onClick={() => subscribeRule({})} />}
             </Form.Item>
-
             <Form.List name='tags' initialValue={[{}]}>
               {(fields, { add, remove }) => (
                 <>
@@ -258,7 +275,6 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
                 </Radio>
               </Radio.Group>
             </Form.Item>
-
             <Form.Item label={t('redefine_channels')} name='redefine_channels' valuePropName='checked'>
               <Checkbox
                 value={1}
@@ -282,7 +298,6 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
                 ))}
               </Checkbox.Group>
             </Form.Item>
-
             <Form.Item label={t('redefine_webhooks')} name='redefine_webhooks' valuePropName='checked'>
               <Checkbox
                 value={1}
@@ -325,7 +340,6 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
                 )}
               </Form.List>
             </div>
-
             <Form.Item label={t('user_group_ids')} name='user_group_ids'>
               <Select mode='multiple' showSearch optionFilterProp='children' filterOption={false} onSearch={(e) => debounceFetcher(e)} onBlur={() => getGroups('')}>
                 {notifyGroupsOptions}
